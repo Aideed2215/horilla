@@ -1,80 +1,45 @@
 {% extends "index.html" %} {% block content %} {% load i18n %}
-{% load basefilters %} {% load horillafilters %}
+{% load basefilters %} {% load moaredfilters %}
 {% include 'shift_request/shift_request_nav.html' %}
 
-<div
-  class="oh-checkpoint-badge mb-2"
-  id="selectedShifts"
-  data-ids="[]"
-  data-clicked=""
-  style="display: none"
-  >
+<div class="oh-checkpoint-badge mb-2" id="selectedShifts" data-ids="[]" data-clicked="" style="display: none">
   {% trans "Selected Shifts" %}
 </div>
 <div class="oh-wrapper">
   {% if data %}
-    <!-- start of Quick filters  -->
-    <div class="d-flex flex-row-reverse" style="height: 3px">
-      <span
-        class="m-3 review_ongoing"
-        onclick="$('[name=canceled]').val('true');$('[name=approved]').val('unknown');$('[name=canceled]').first().change();$('.filterButton').click()"
-        style="cursor: pointer"
-      >
-        <span
-          class="oh-dot oh-dot--small me-1"
-          style="background-color: red"
-        ></span>
-        {% trans "Rejected" %}
-      </span>
-      <span
-        class="m-3 paid"
-        onclick="$('[name=approved]').val('true');$('[name=canceled]').val('unknown');$('[name=approved]').first().change();$('.filterButton').click()"
-        style="cursor: pointer"
-      >
-        <span
-          class="oh-dot oh-dot--small me-1"
-          style="background-color: yellowgreen"
-        ></span>
-        {% trans "Approved" %}
-      </span>
-    </div>
-    <!-- end of quick filters  -->
+  <!-- start of Quick filters  -->
+  <div class="d-flex flex-row-reverse" style="height: 3px">
+    <span class="m-3 review_ongoing"
+      onclick="$('[name=canceled]').val('true');$('[name=approved]').val('unknown');$('[name=canceled]').first().change();$('.filterButton').click()"
+      style="cursor: pointer">
+      <span class="oh-dot oh-dot--small me-1" style="background-color: red"></span>
+      {% trans "Rejected" %}
+    </span>
+    <span class="m-3 paid"
+      onclick="$('[name=approved]').val('true');$('[name=canceled]').val('unknown');$('[name=approved]').first().change();$('.filterButton').click()"
+      style="cursor: pointer">
+      <span class="oh-dot oh-dot--small me-1" style="background-color: yellowgreen"></span>
+      {% trans "Approved" %}
+    </span>
+  </div>
+  <!-- end of quick filters  -->
 
-    <!-- start of select all instance and export  -->
-    <div
-      id="selectAllShifts"
-      style="cursor: pointer"
-      class="oh-checkpoint-badge text-success mb-2"
-    >
-      {% trans "Select All Shifts" %}
-    </div>
-    <div
-      id="unselectAllShifts"
-      style="cursor: pointer; display: none"
-      class="oh-checkpoint-badge text-secondary mb-2"
-    >
-      {% trans "Unselect All Shifts" %}
-    </div>
-    <div
-      class="oh-checkpoint-badge text-info mb-2"
-      id="exportShifts"
-      style="cursor: pointer"
-    >
-      {% trans "Export Shifts" %}
-    </div>
-    <div
-      class="oh-checkpoint-badge text-danger mb-2"
-      id="selectedShowShifts"
-      style="display: none"
-    ></div>
-    <!--end of select all instance and export  -->
+  <!-- start of select all instance and export  -->
+  <div id="selectAllShifts" style="cursor: pointer" class="oh-checkpoint-badge text-success mb-2">
+    {% trans "Select All Shifts" %}
+  </div>
+  <div id="unselectAllShifts" style="cursor: pointer; display: none" class="oh-checkpoint-badge text-secondary mb-2">
+    {% trans "Unselect All Shifts" %}
+  </div>
+  <div class="oh-checkpoint-badge text-info mb-2" id="exportShifts" style="cursor: pointer">
+    {% trans "Export Shifts" %}
+  </div>
+  <div class="oh-checkpoint-badge text-danger mb-2" id="selectedShowShifts" style="display: none"></div>
+  <!--end of select all instance and export  -->
   {% endif %}
   <div class="oh-tabs">
     <ul class="oh-tabs__tablist">
-      <li
-        class="oh-tabs__tab oh-tabs__tab--active"
-        data-target="#shift_request"
-      >
+      <li class="oh-tabs__tab oh-tabs__tab--active" data-target="#shift_request">
         {% trans "Shift Requests" %}
       </li>
       <li class="oh-tabs__tab" data-target="#allocated_shift">
@@ -87,23 +52,15 @@
   </div>
 </div>
 
-<div
-  class="oh-modal"
-  id="shiftRequestModalUpdate"
-  role="dialog"
-  aria-labelledby="shiftRequestModalUpdate"
-  aria-hidden="true"
-  >
+<div class="oh-modal" id="shiftRequestModalUpdate" role="dialog" aria-labelledby="shiftRequestModalUpdate"
+  aria-hidden="true">
   <div class="oh-modal__dialog">
     <div class="oh-modal__dialog-header">
       <h5 class="oh-modal__dialog-title" id="shiftRequestModalUpdateLabel">
         {% trans "Update Request" %}
       </h5>
-      <button
-        class="oh-modal__close--custom"
-        aria-label="Close"
-        onclick="$(this).parents().closest('.oh-modal--show').toggleClass('oh-modal--show')"
-      >
+      <button class="oh-modal__close--custom" aria-label="Close"
+        onclick="$(this).parents().closest('.oh-modal--show').toggleClass('oh-modal--show')">
         <ion-icon name="close-outline"></ion-icon>
       </button>
     </div>

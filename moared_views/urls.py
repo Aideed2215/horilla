@@ -41,7 +41,7 @@ urlpatterns = [
     ),
     path(
         "generic-delete",
-        views.HorillaDeleteConfirmationView.as_view(),
+        views.moaredDeleteConfirmationView.as_view(),
         name="generic-delete",
     ),
 ]

@@ -136,16 +136,16 @@ For installing the python dependencies required for the project, run the followi
 >Run the requirement installation command again
 
 3. Set up the database by running the following commands:
-   _By default the test database will be loaded which will have demo data inside it. If you wish to start with a fresh database, you can either remove the TestDB_Horilla.sqlite3 from the project directory or change the name of the database inside the moared/settings.py file. (You can configure different database based on your choice, of which configurations settings is given below in the documentation._
+   _By default the test database will be loaded which will have demo data inside it. If you wish to start with a fresh database, you can either remove the TestDB_moared.sqlite3 from the project directory or change the name of the database inside the moared/settings.py file. (You can configure different database based on your choice, of which configurations settings is given below in the documentation._
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 4. Create an admin employee account (use this command if you are starting with a fresh database, for the demo database there is already a Moared admin user created with credentials _admin_ and _admin_ as username and password respectively).
 ```bash
-python manage.py createhorillauser
+python manage.py createmoareduser
 ```
->Note: createhorillauser is a similar command to createsuperuser in Django,  which creates an admin user along with a related admin employee into the database.
+>Note: createmoareduser is a similar command to createsuperuser in Django,  which creates an admin user along with a related admin employee into the database.
 
 <br>
 Enter the details asked for creating the admin user for the project.
@@ -175,7 +175,7 @@ If everything is configured correctly, you should be able to access your Moared 
 >Note:
 >>By default a SQLite database will be setup for the project with demo data already loaded.
 
->>If you wish to start with a fresh database, remove the db.sqlite3 file from the project directory and run the migrate command followed by the createhorillauser command to start with a fresh database.
+>>If you wish to start with a fresh database, remove the db.sqlite3 file from the project directory and run the migrate command followed by the createmoareduser command to start with a fresh database.
 
 >>Or if you wish to change the database, refer the below section.
 

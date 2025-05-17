@@ -26,8 +26,8 @@ from base.methods import (
 )
 from employee.filters import EmployeeFilter
 from moared import moared_middlewares
-from moared_widgets.widgets.moared_multi_select_field import HorillaMultiSelectField
-from moared_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from moared_widgets.widgets.moared_multi_select_field import moaredMultiSelectField
+from moared_widgets.widgets.select_widgets import moaredMultiSelectWidget
 from pms.models import (
     AnonymousFeedback,
     BonusPointSetting,
@@ -116,9 +116,9 @@ class ObjectiveForm(BaseForm):
             "employee", None
         )  # access the logged-in user's information
         super().__init__(*args, **kwargs)
-        self.fields["assignees"] = HorillaMultiSelectField(
+        self.fields["assignees"] = moaredMultiSelectField(
             queryset=Employee.objects.all(),
-            widget=HorillaMultiSelectWidget(
+            widget=moaredMultiSelectWidget(
                 filter_route_name="employee-widget-filter",
                 filter_class=EmployeeFilter,
                 filter_instance_contex_name="f",
@@ -129,9 +129,9 @@ class ObjectiveForm(BaseForm):
             label="Assignees",
         )
 
-        self.fields["managers"] = HorillaMultiSelectField(
+        self.fields["managers"] = moaredMultiSelectField(
             queryset=Employee.objects.all(),
-            widget=HorillaMultiSelectWidget(
+            widget=moaredMultiSelectWidget(
                 filter_route_name="employee-widget-filter",
                 filter_class=EmployeeFilter,
                 filter_instance_contex_name="f",
@@ -157,7 +157,7 @@ class ObjectiveForm(BaseForm):
         cleaned_data = super().clean()
         add_assignees = cleaned_data.get("add_assignees")
         for field_name, field_instance in self.fields.items():
-            if isinstance(field_instance, HorillaMultiSelectField):
+            if isinstance(field_instance, moaredMultiSelectField):
                 self.errors.pop(field_name, None)
                 if (
                     add_assignees
@@ -773,9 +773,9 @@ class FeedbackForm(ModelForm):
         super().__init__(*args, **kwargs)
 
         # Moared multi select filter for employee
-        self.fields["subordinate_id"] = HorillaMultiSelectField(
+        self.fields["subordinate_id"] = moaredMultiSelectField(
             queryset=Employee.objects.all(),
-            widget=HorillaMultiSelectWidget(
+            widget=moaredMultiSelectWidget(
                 filter_route_name="employee-widget-filter",
                 filter_class=EmployeeFilter,
                 filter_instance_contex_name="f",
@@ -1079,7 +1079,7 @@ class MeetingsForm(BaseForm):
         employees = Employee.objects.filter(id__in=employee_id)
         cleaned_data["employee_id"] = employees
 
-        if isinstance(self.fields["employee_id"], HorillaMultiSelectField):
+        if isinstance(self.fields["employee_id"], moaredMultiSelectField):
             ids = self.data.getlist("employee_id")
             if ids:
                 self.errors.pop("employee_id", None)
@@ -1097,9 +1097,9 @@ class MeetingsForm(BaseForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["employee_id"] = HorillaMultiSelectField(
+        self.fields["employee_id"] = moaredMultiSelectField(
             queryset=Employee.objects.filter(employee_work_info__isnull=False),
-            widget=HorillaMultiSelectWidget(
+            widget=moaredMultiSelectWidget(
                 filter_route_name="employee-widget-filter",
                 filter_class=EmployeeFilter,
                 filter_instance_contex_name="f",

@@ -3,7 +3,7 @@ from django.apps import AppConfig
 from moared_automations.signals import start_automation
 
 
-class HorillaAutomationConfig(AppConfig):
+class moaredAutomationConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "moared_automations"
 
@@ -11,7 +11,7 @@ class HorillaAutomationConfig(AppConfig):
         ready = super().ready()
         try:
 
-            from base.templatetags.horillafilters import app_installed
+            from base.templatetags.moaredfilters import app_installed
             from employee.models import Employee
             from moared_automations.methods.methods import get_related_models
             from moared_automations.models import MODEL_CHOICES

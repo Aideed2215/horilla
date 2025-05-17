@@ -4,12 +4,12 @@ from django.contrib.auth.models import User
 from django.db import models
 
 from moared.moared_middlewares import _thread_locals
-from moared.models import HorillaModel
+from moared.models import moaredModel
 
 # Create your models here.
 
 
-class ToggleColumn(HorillaModel):
+class ToggleColumn(moaredModel):
     """
     ToggleColumn
     """
@@ -33,7 +33,7 @@ class ToggleColumn(HorillaModel):
         return str(self.user_id.employee_get)
 
 
-class ActiveTab(HorillaModel):
+class ActiveTab(moaredModel):
     """
     ActiveTab
     """
@@ -42,7 +42,7 @@ class ActiveTab(HorillaModel):
     tab_target = models.CharField(max_length=256)
 
 
-class ActiveGroup(HorillaModel):
+class ActiveGroup(moaredModel):
     """
     ActiveGroup
     """
@@ -52,7 +52,7 @@ class ActiveGroup(HorillaModel):
     group_by_field = models.CharField(max_length=256)
 
 
-class SavedFilter(HorillaModel):
+class SavedFilter(moaredModel):
     """
     SavedFilter
     """
@@ -75,7 +75,7 @@ class SavedFilter(HorillaModel):
         return str(self.title)
 
 
-class ActiveView(HorillaModel):
+class ActiveView(moaredModel):
     """
     This model to store the active view type for HNV
     """

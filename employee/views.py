@@ -109,9 +109,9 @@ from moared.decorators import (
     owner_can_enter,
     permission_required,
 )
-from moared.filters import HorillaPaginator
+from moared.filters import moaredPaginator
 from moared.group_by import group_by_queryset
-from moared.moared_settings import HORILLA_DATE_FORMATS
+from moared.moared_settings import moared_DATE_FORMATS
 from moared.methods import get_moared_model_class
 from moared_audit.models import AccountBlockUnblock, HistoryTrackingFields
 from moared_documents.forms import (
@@ -911,7 +911,7 @@ def paginator_qry(qryset, page_number):
     """
     This method is used to paginate query set
     """
-    paginator = HorillaPaginator(qryset, get_pagination())
+    paginator = moaredPaginator(qryset, get_pagination())
     qryset = paginator.get_page(page_number)
     return qryset
 
@@ -2688,7 +2688,7 @@ def work_info_export(request):
                 start_date = datetime.strptime(str(value), "%Y-%m-%d").date()
 
                 # Print the formatted date for each format
-                for format_name, format_string in HORILLA_DATE_FORMATS.items():
+                for format_name, format_string in moared_DATE_FORMATS.items():
                     if format_name == date_format:
                         data = start_date.strftime(format_string)
 

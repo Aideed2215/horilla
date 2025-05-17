@@ -3,9 +3,9 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _trans
 
 from base.methods import eval_validate
-from base.models import HorillaMailTemplate
+from base.models import moaredMailTemplate
 from employee.models import Employee
-from moared.models import HorillaModel
+from moared.models import moaredModel
 from moared_views.cbv_methods import render_template
 
 MODEL_CHOICES = []
@@ -21,7 +21,7 @@ CONDITIONS = [
 ]
 
 
-class MailAutomation(HorillaModel):
+class MailAutomation(moaredModel):
     """
     MailAutoMation
     """
@@ -45,14 +45,14 @@ class MailAutomation(HorillaModel):
     trigger = models.CharField(max_length=10, choices=choices)
     # udpate the on_update logic to if and only if when
     # changes in the previous and current value
-    mail_template = models.ForeignKey(HorillaMailTemplate, on_delete=models.CASCADE)
+    mail_template = models.ForeignKey(moaredMailTemplate, on_delete=models.CASCADE)
     also_sent_to = models.ManyToManyField(
         Employee,
         blank=True,
         verbose_name=_trans("Also Send to"),
     )
     template_attachments = models.ManyToManyField(
-        HorillaMailTemplate,
+        moaredMailTemplate,
         related_name="template_attachment",
         blank=True,
     )

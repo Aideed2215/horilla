@@ -2,8 +2,8 @@
 models.py
 =========
 
-This module defines the abstract base model `HorillaModel` for the Moared HRMS project.
-The `HorillaModel` provides common fields and functionalities for other models within
+This module defines the abstract base model `moaredModel` for the Moared HRMS project.
+The `moaredModel` provides common fields and functionalities for other models within
 the application, such as tracking creation and modification timestamps and user
 information, audit logging, and active/inactive status management.
 """
@@ -34,7 +34,7 @@ def url(self: FieldFile):
 setattr(FieldFile, "url", url)
 
 
-class HorillaModel(models.Model):
+class moaredModel(models.Model):
     """
     An abstract base model that includes common fields and functionalities
     for models within the Moared application.
@@ -70,7 +70,7 @@ class HorillaModel(models.Model):
 
     class Meta:
         """
-        Meta class for HorillaModel
+        Meta class for moaredModel
         """
 
         abstract = True
@@ -97,7 +97,7 @@ class HorillaModel(models.Model):
             if request and not request.user.is_anonymous:
                 self.modified_by = user
 
-        super(HorillaModel, self).save(*args, **kwargs)
+        super(moaredModel, self).save(*args, **kwargs)
 
     @classmethod
     def find(cls, object_id):
@@ -122,4 +122,4 @@ class HorillaModel(models.Model):
             obj.save()
 
 
-auditlog.register(HorillaModel, serialize_data=True)
+auditlog.register(moaredModel, serialize_data=True)

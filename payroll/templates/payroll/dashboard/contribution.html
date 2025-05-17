@@ -1,4 +1,4 @@
-{% load i18n static horillafilters %}
+{% load i18n static moaredfilters %}
 <div class="oh-sticky-table" style="height: 250px;">
   {% if contribution_deductions %}
   <div class="oh-sticky-table__table oh-table--sortable">
@@ -17,18 +17,21 @@
     </div>
     <div class="oh-sticky-table__tbody">
       {% for deduction in contribution_deductions %}
-        <div class="oh-sticky-table__tr" draggable="true">
-          <div class="oh-sticky-table__sd">
-            <div class="oh-profile oh-profile--md">
-              <div class="oh-profile__avatar mr-1">
-                <img src="https://ui-avatars.com/api/?name={{ deduction.title }}&background=random" class="oh-profile__image" />
-              </div>
-              <span class="oh-profile__name oh-text--dark">{{ deduction.title }}</span>
+      <div class="oh-sticky-table__tr" draggable="true">
+        <div class="oh-sticky-table__sd">
+          <div class="oh-profile oh-profile--md">
+            <div class="oh-profile__avatar mr-1">
+              <img src="https://ui-avatars.com/api/?name={{ deduction.title }}&background=random"
+                class="oh-profile__image" />
             </div>
+            <span class="oh-profile__name oh-text--dark">{{ deduction.title }}</span>
           </div>
-          <div class="oh-sticky-table__td">{{ deduction.employee_contribution|floatformat:2|currency_symbol_position }}</div>
-          <div class="oh-sticky-table__td">{{ deduction.employer_contribution|floatformat:2|currency_symbol_position }}</div>
         </div>
+        <div class="oh-sticky-table__td">{{ deduction.employee_contribution|floatformat:2|currency_symbol_position }}
+        </div>
+        <div class="oh-sticky-table__td">{{ deduction.employer_contribution|floatformat:2|currency_symbol_position }}
+        </div>
+      </div>
       {% endfor %}
     </div>
     {% else %}
@@ -36,6 +39,6 @@
       <img width="100px" class="mt-5" src="{% static 'images/ui/no_records.svg' %}" alt="" />
       <h3 style="font-size:16px" class="oh-404__subtitle">{% trans "No records available." %}</h3>
     </div>
-  {% endif %}
+    {% endif %}
   </div>
 </div>

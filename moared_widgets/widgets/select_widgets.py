@@ -21,9 +21,9 @@ def get_short_uuid(length: int, prefix: str = "widget"):
     return prefix + str(uuid_str[:length]).replace("-", "")
 
 
-class HorillaMultiSelectWidget(forms.Widget):
+class moaredMultiSelectWidget(forms.Widget):
     """
-    HorillaMultiSelectWidget
+    moaredMultiSelectWidget
     """
 
     def __init__(

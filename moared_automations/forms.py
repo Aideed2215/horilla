@@ -12,8 +12,8 @@ from employee.filters import EmployeeFilter
 from employee.models import Employee
 from moared_automations.methods.methods import generate_choices
 from moared_automations.models import MODEL_CHOICES, MailAutomation
-from moared_widgets.widgets.moared_multi_select_field import HorillaMultiSelectField
-from moared_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from moared_widgets.widgets.moared_multi_select_field import moaredMultiSelectField
+from moared_widgets.widgets.select_widgets import moaredMultiSelectWidget
 
 
 class AutomationForm(ModelForm):
@@ -28,10 +28,10 @@ class AutomationForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["also_sent_to"] = HorillaMultiSelectField(
+        self.fields["also_sent_to"] = moaredMultiSelectField(
             queryset=Employee.objects.all(),
             required=False,
-            widget=HorillaMultiSelectWidget(
+            widget=moaredMultiSelectWidget(
                 filter_route_name="employee-widget-filter",
                 filter_class=EmployeeFilter,
                 filter_instance_contex_name="f",
@@ -77,7 +77,7 @@ class AutomationForm(ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        if isinstance(self.fields["also_sent_to"], HorillaMultiSelectField):
+        if isinstance(self.fields["also_sent_to"], moaredMultiSelectField):
             self.errors.pop("also_sent_to", None)
 
             employee_data = self.fields["also_sent_to"].queryset.filter(

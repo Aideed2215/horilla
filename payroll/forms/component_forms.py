@@ -21,9 +21,9 @@ from employee.filters import EmployeeFilter
 from employee.models import BonusPoint, Employee
 from moared import moared_middlewares
 from moared.methods import get_moared_model_class
-from moared_widgets.forms import HorillaForm, orginal_template_name
-from moared_widgets.widgets.moared_multi_select_field import HorillaMultiSelectField
-from moared_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from moared_widgets.forms import moaredForm, orginal_template_name
+from moared_widgets.widgets.moared_multi_select_field import moaredMultiSelectField
+from moared_widgets.widgets.select_widgets import moaredMultiSelectWidget
 from notifications.signals import notify
 from payroll.models import tax_models as models
 from payroll.models.models import (
@@ -75,9 +75,9 @@ class AllowanceForm(forms.ModelForm):
             kwargs["initial"] = initial
         super().__init__(*args, **kwargs)
 
-        self.fields["specific_employees"] = HorillaMultiSelectField(
+        self.fields["specific_employees"] = moaredMultiSelectField(
             queryset=Employee.objects.all(),
-            widget=HorillaMultiSelectWidget(
+            widget=moaredMultiSelectWidget(
                 filter_route_name="employee-widget-filter",
                 filter_class=EmployeeFilter,
                 filter_instance_contex_name="f",
@@ -110,7 +110,7 @@ class AllowanceForm(forms.ModelForm):
         condition_based = self.data.get("is_condition_based")
 
         for field_name, field_instance in self.fields.items():
-            if isinstance(field_instance, HorillaMultiSelectField):
+            if isinstance(field_instance, moaredMultiSelectField):
                 self.errors.pop(field_name, None)
                 if (
                     not specific_employees
@@ -210,9 +210,9 @@ class DeductionForm(forms.ModelForm):
             kwargs["initial"] = initial
         super().__init__(*args, **kwargs)
 
-        self.fields["specific_employees"] = HorillaMultiSelectField(
+        self.fields["specific_employees"] = moaredMultiSelectField(
             queryset=Employee.objects.all(),
-            widget=HorillaMultiSelectWidget(
+            widget=moaredMultiSelectWidget(
                 filter_route_name="employee-widget-filter",
                 filter_class=EmployeeFilter,
                 filter_instance_contex_name="f",
@@ -240,7 +240,7 @@ class DeductionForm(forms.ModelForm):
         condition_based = self.data.get("is_condition_based")
 
         for field_name, field_instance in self.fields.items():
-            if isinstance(field_instance, HorillaMultiSelectField):
+            if isinstance(field_instance, moaredMultiSelectField):
                 self.errors.pop(field_name, None)
                 if (
                     not specific_employees
@@ -394,7 +394,7 @@ class PayslipForm(ModelForm):
         }
 
 
-class GeneratePayslipForm(HorillaForm):
+class GeneratePayslipForm(moaredForm):
     """
     Form for Payslip
     """
@@ -404,9 +404,9 @@ class GeneratePayslipForm(HorillaForm):
         required=True,
         # help_text="Enter +-something if you want to generate payslips by batches",
     )
-    employee_id = HorillaMultiSelectField(
+    employee_id = moaredMultiSelectField(
         queryset=Employee.objects.none(),
-        widget=HorillaMultiSelectWidget(
+        widget=moaredMultiSelectWidget(
             filter_route_name="employee-widget-filter",
             filter_class=EmployeeFilter,
             filter_instance_contex_name="f",

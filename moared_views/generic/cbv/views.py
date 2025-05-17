@@ -37,9 +37,9 @@ from moared_views.templatetags.generic_template_filters import getattribute
 
 
 @method_decorator(hx_request_required, name="dispatch")
-class HorillaListView(ListView):
+class moaredListView(ListView):
     """
-    HorillaListView
+    moaredListView
     """
 
     filter_class: FilterSet = None
@@ -106,7 +106,7 @@ class HorillaListView(ListView):
 
         request = getattr(_thread_locals, "request", None)
         self.request = request
-        update_initial_cache(request, CACHE, HorillaListView)
+        update_initial_cache(request, CACHE, moaredListView)
 
         # hidden columns configuration
         existing_instance = models.ToggleColumn.objects.filter(
@@ -351,7 +351,7 @@ class HorillaListView(ListView):
                 for instance in group["list"]:
                     instance.ordered_ids = ordered_ids
                     ordered_ids.append(instance.pk)
-        CACHE.get(self.request.session.session_key + "cbv")[HorillaListView] = context
+        CACHE.get(self.request.session.session_key + "cbv")[moaredListView] = context
         from moared.urls import path, urlpatterns
 
         self.export_path = f"export-list-view-{get_short_uuid(4)}/"
@@ -403,7 +403,7 @@ class HorillaListView(ListView):
 
         _model = self.model
 
-        class HorillaListViewResorce(resources.ModelResource):
+        class moaredListViewResorce(resources.ModelResource):
             """
             Instant Resource class
             """
@@ -444,7 +444,7 @@ class HorillaListView(ListView):
                 cleaned_text = "\n".join(non_blank_lines)
                 return cleaned_text
 
-        book_resource = HorillaListViewResorce()
+        book_resource = moaredListViewResorce()
 
         # Export the data using the resource
         dataset = book_resource.export(queryset)
@@ -460,7 +460,7 @@ class HorillaListView(ListView):
         return response
 
 
-class HorillaSectionView(TemplateView):
+class moaredSectionView(TemplateView):
     """
     Moared Template View
     """
@@ -469,7 +469,7 @@ class HorillaSectionView(TemplateView):
         super().__init__(**kwargs)
         request = getattr(_thread_locals, "request", None)
         self.request = request
-        update_initial_cache(request, CACHE, HorillaListView)
+        update_initial_cache(request, CACHE, moaredListView)
 
     nav_url: str = ""
     view_url: str = ""
@@ -493,7 +493,7 @@ class HorillaSectionView(TemplateView):
 
 
 @method_decorator(hx_request_required, name="dispatch")
-class HorillaDetailedView(DetailView):
+class moaredDetailedView(DetailView):
     """
     HorillDetailedView
     """
@@ -513,7 +513,7 @@ class HorillaDetailedView(DetailView):
         super().__init__(**kwargs)
         request = getattr(_thread_locals, "request", None)
         self.request = request
-        update_initial_cache(request, CACHE, HorillaDetailedView)
+        update_initial_cache(request, CACHE, moaredDetailedView)
 
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
@@ -548,16 +548,16 @@ class HorillaDetailedView(DetailView):
         context["cols"] = self.cols
 
         CACHE.get(self.request.session.session_key + "cbv")[
-            HorillaDetailedView
+            moaredDetailedView
         ] = context
 
         return context
 
 
 @method_decorator(hx_request_required, name="dispatch")
-class HorillaTabView(TemplateView):
+class moaredTabView(TemplateView):
     """
-    HorillaTabView
+    moaredTabView
     """
 
     view_id: str = get_short_uuid(3, "htv")
@@ -569,7 +569,7 @@ class HorillaTabView(TemplateView):
         super().__init__(**kwargs)
         request = getattr(_thread_locals, "request", None)
         self.request = request
-        update_initial_cache(request, CACHE, HorillaTabView)
+        update_initial_cache(request, CACHE, moaredTabView)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -582,15 +582,15 @@ class HorillaTabView(TemplateView):
         context["tabs"] = self.tabs
         context["view_id"] = self.view_id
 
-        CACHE.get(self.request.session.session_key + "cbv")[HorillaTabView] = context
+        CACHE.get(self.request.session.session_key + "cbv")[moaredTabView] = context
 
         return context
 
 
 @method_decorator(hx_request_required, name="dispatch")
-class HorillaCardView(ListView):
+class moaredCardView(ListView):
     """
-    HorillaCardView
+    moaredCardView
     """
 
     filter_class: FilterSet = None
@@ -635,7 +635,7 @@ class HorillaCardView(ListView):
         super().__init__(**kwargs)
         request = getattr(_thread_locals, "request", None)
         self.request = request
-        update_initial_cache(request, CACHE, HorillaCardView)
+        update_initial_cache(request, CACHE, moaredCardView)
         self._saved_filters = QueryDict()
 
     def get_queryset(self):
@@ -708,7 +708,7 @@ class HorillaCardView(ListView):
                 instance.ordered_ids = ordered_ids
                 ordered_ids.append(instance.pk)
 
-        CACHE.get(self.request.session.session_key + "cbv")[HorillaCardView] = context
+        CACHE.get(self.request.session.session_key + "cbv")[moaredCardView] = context
         referrer = self.request.GET.get("referrer", "")
         if referrer:
             # Remove the protocol and domain part
@@ -763,9 +763,9 @@ def save(self: forms.ModelForm, commit=True, *args, **kwargs):
 
 
 @method_decorator(hx_request_required, name="dispatch")
-class HorillaFormView(FormView):
+class moaredFormView(FormView):
     """
-    HorillaFormView
+    moaredFormView
     """
 
     class HttpResponse:
@@ -824,7 +824,7 @@ class HorillaFormView(FormView):
         self.request = request
         if not self.success_url:
             self.success_url = self.request.path
-        update_initial_cache(request, CACHE, HorillaFormView)
+        update_initial_cache(request, CACHE, moaredFormView)
 
         if self.form_class:
             setattr(self.form_class, "structured", structured)
@@ -1014,15 +1014,15 @@ class HorillaFormView(FormView):
                 self.form_class.verbose_name = self.new_display_title
             form.close_button_attrs = self.close_button_attrs
             form.submit_button_attrs = self.submit_button_attrs
-            CACHE.get(self.request.session.session_key + "cbv")[HorillaFormView] = form
+            CACHE.get(self.request.session.session_key + "cbv")[moaredFormView] = form
             self.form = form
         return self.form
 
 
 @method_decorator(hx_request_required, name="dispatch")
-class HorillaNavView(TemplateView):
+class moaredNavView(TemplateView):
     """
-    HorillaNavView
+    moaredNavView
 
     filter form submit button id: applyFilter
     """
@@ -1048,7 +1048,7 @@ class HorillaNavView(TemplateView):
         super().__init__(**kwargs)
         request = getattr(_thread_locals, "request", None)
         self.request = request
-        update_initial_cache(request, CACHE, HorillaNavView)
+        update_initial_cache(request, CACHE, moaredNavView)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1076,14 +1076,14 @@ class HorillaNavView(TemplateView):
         context["active_view"] = models.ActiveView.objects.filter(
             path=self.request.path
         ).first()
-        CACHE.get(self.request.session.session_key + "cbv")[HorillaNavView] = context
+        CACHE.get(self.request.session.session_key + "cbv")[moaredNavView] = context
         return context
 
 
 @method_decorator(hx_request_required, name="dispatch")
-class HorillaProfileView(DetailView):
+class moaredProfileView(DetailView):
     """
-    GenericHorillaProfileView
+    GenericmoaredProfileView
     """
 
     template_name = "generic/moared_profile_view.html"
@@ -1106,7 +1106,7 @@ class HorillaProfileView(DetailView):
 
         request = getattr(_thread_locals, "request", None)
         self.request = request
-        update_initial_cache(request, CACHE, HorillaProfileView)
+        update_initial_cache(request, CACHE, moaredProfileView)
 
         from moared.urls import path, urlpatterns
 

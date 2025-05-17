@@ -135,7 +135,7 @@ from base.models import (
     EmployeeShiftSchedule,
     EmployeeType,
     Holidays,
-    HorillaMailTemplate,
+    moaredMailTemplate,
     JobPosition,
     JobRole,
     MultipleApprovalCondition,
@@ -619,7 +619,7 @@ def reset_send_success(request):
     return render(request, "reset_send.html")
 
 
-class HorillaPasswordResetView(PasswordResetView):
+class moaredPasswordResetView(PasswordResetView):
     """
     Moared View for Reset Password
     """
@@ -1527,12 +1527,12 @@ def mail_server_create_or_update(request):
 
 
 @login_required
-@permission_required("base.view_horillamailtemplate")
+@permission_required("base.view_moaredmailtemplate")
 def view_mail_templates(request):
     """
     This method will render template to disply the offerletter templates
     """
-    templates = HorillaMailTemplate.objects.all()
+    templates = moaredMailTemplate.objects.all()
     form = MailTemplateForm()
     if templates.exists():
         template = "mail/view_templates.html"
@@ -1548,12 +1548,12 @@ def view_mail_templates(request):
 
 @login_required
 @hx_request_required
-@permission_required("base.change_horillamailtemplate")
+@permission_required("base.change_moaredmailtemplate")
 def view_mail_template(request, obj_id):
     """
     This method is used to display the template/form to edit
     """
-    template = HorillaMailTemplate.objects.get(id=obj_id)
+    template = moaredMailTemplate.objects.get(id=obj_id)
     form = MailTemplateForm(instance=template)
     searchWords = form.get_template_language()
     if request.method == "POST":
@@ -1572,7 +1572,7 @@ def view_mail_template(request, obj_id):
 
 @login_required
 @require_http_methods(["POST"])
-@permission_required("base.add_horillamailtemplate")
+@permission_required("base.add_moaredmailtemplate")
 def create_mail_templates(request):
     """
     This method is used to create offerletter template
@@ -1588,10 +1588,10 @@ def create_mail_templates(request):
 
 
 @login_required
-@permission_required("base.delete_horillamailtemplate")
+@permission_required("base.delete_moaredmailtemplate")
 def delete_mail_templates(request):
     ids = request.GET.getlist("ids")
-    result = HorillaMailTemplate.objects.filter(id__in=ids).delete()
+    result = moaredMailTemplate.objects.filter(id__in=ids).delete()
     messages.success(request, "Template deleted")
     return redirect(view_mail_templates)
 

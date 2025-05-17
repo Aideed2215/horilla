@@ -2,11 +2,11 @@
 moared_automations/filters.py
 """
 
-from moared.filters import HorillaFilterSet, django_filters
+from moared.filters import moaredFilterSet, django_filters
 from moared_automations.models import MailAutomation
 
 
-class AutomationFilter(HorillaFilterSet):
+class AutomationFilter(moaredFilterSet):
     """
     AutomationFilter
     """

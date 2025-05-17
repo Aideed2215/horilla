@@ -50,7 +50,7 @@ from base.models import (
     EmployeeShiftSchedule,
     EmployeeType,
     Holidays,
-    HorillaMailTemplate,
+    moaredMailTemplate,
     JobPosition,
     JobRole,
     MultipleApprovalCondition,
@@ -74,8 +74,8 @@ from moared import moared_middlewares
 from moared.moared_middlewares import _thread_locals
 from moared.methods import get_moared_model_class
 from moared_audit.models import AuditTag
-from moared_widgets.widgets.moared_multi_select_field import HorillaMultiSelectField
-from moared_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from moared_widgets.widgets.moared_multi_select_field import moaredMultiSelectField
+from moared_widgets.widgets.select_widgets import moaredMultiSelectWidget
 
 # your form here
 
@@ -367,9 +367,9 @@ class AssignPermission(Form):
     Forms to assign user permision
     """
 
-    employee = HorillaMultiSelectField(
+    employee = moaredMultiSelectField(
         queryset=Employee.objects.all(),
-        widget=HorillaMultiSelectWidget(
+        widget=moaredMultiSelectWidget(
             filter_route_name="employee-widget-filter",
             filter_class=EmployeeFilter,
             filter_instance_contex_name="f",
@@ -483,7 +483,7 @@ class JobPositionMultiForm(ModelForm):
     JobPosition model's form
     """
 
-    department_id = HorillaMultiSelectField(queryset=Department.objects.all())
+    department_id = moaredMultiSelectField(queryset=Department.objects.all())
 
     class Meta:
         model = JobPosition
@@ -719,9 +719,9 @@ class RotatingWorkTypeAssignForm(ModelForm):
     RotatingWorkTypeAssign model's form
     """
 
-    employee_id = HorillaMultiSelectField(
+    employee_id = moaredMultiSelectField(
         queryset=Employee.objects.filter(employee_work_info__isnull=False),
-        widget=HorillaMultiSelectWidget(
+        widget=moaredMultiSelectWidget(
             filter_route_name="employee-widget-filter",
             filter_class=EmployeeFilter,
             filter_instance_contex_name="f",
@@ -1361,9 +1361,9 @@ class RotatingShiftAssignForm(forms.ModelForm):
     RotatingShiftAssign model's form
     """
 
-    employee_id = HorillaMultiSelectField(
+    employee_id = moaredMultiSelectField(
         queryset=Employee.objects.filter(employee_work_info__isnull=False),
-        widget=HorillaMultiSelectWidget(
+        widget=moaredMultiSelectWidget(
             filter_route_name="employee-widget-filter",
             filter_class=EmployeeFilter,
             filter_instance_contex_name="f",
@@ -2138,7 +2138,7 @@ class MailTemplateForm(ModelForm):
     """
 
     class Meta:
-        model = HorillaMailTemplate
+        model = moaredMailTemplate
         fields = "__all__"
         widgets = {
             "body": forms.Textarea(

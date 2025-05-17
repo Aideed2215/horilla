@@ -24,9 +24,9 @@ from employee.filters import EmployeeFilter
 from employee.forms import MultipleFileField
 from employee.models import Employee
 from moared import moared_middlewares
-from moared_widgets.forms import HorillaForm, HorillaModelForm
-from moared_widgets.widgets.moared_multi_select_field import HorillaMultiSelectField
-from moared_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from moared_widgets.forms import moaredForm, moaredModelForm
+from moared_widgets.widgets.moared_multi_select_field import moaredMultiSelectField
+from moared_widgets.widgets.select_widgets import moaredMultiSelectWidget
 from leave.methods import (
     calculate_requested_days,
     company_leave_dates_list,
@@ -161,9 +161,9 @@ class ConditionForm(forms.ModelForm):
 
 class LeaveTypeForm(ConditionForm):
 
-    employee_id = HorillaMultiSelectField(
+    employee_id = moaredMultiSelectField(
         queryset=Employee.objects.all(),
-        widget=HorillaMultiSelectWidget(
+        widget=moaredMultiSelectWidget(
             filter_route_name="employee-widget-filter",
             filter_class=EmployeeFilter,
             filter_instance_contex_name="f",
@@ -593,7 +593,7 @@ class AvailableLeaveForm(ModelForm):
         fields = ["leave_type_id", "employee_id", "is_active"]
 
 
-class LeaveOneAssignForm(HorillaModelForm):
+class LeaveOneAssignForm(moaredModelForm):
     """
     Form for assigning available leave to employees.
 
@@ -601,12 +601,12 @@ class LeaveOneAssignForm(HorillaModelForm):
     by specifying the employee and setting the is_active flag.
 
     Attributes:
-        - employee_id: A HorillaMultiSelectField representing the employee to assign leave to.
+        - employee_id: A moaredMultiSelectField representing the employee to assign leave to.
     """
 
-    employee_id = HorillaMultiSelectField(
+    employee_id = moaredMultiSelectField(
         queryset=Employee.objects.all(),
-        widget=HorillaMultiSelectWidget(
+        widget=moaredMultiSelectWidget(
             filter_route_name="employee-widget-filter",
             filter_class=EmployeeFilter,
             filter_instance_contex_name="f",
@@ -1063,7 +1063,7 @@ class LeaveRequestExportForm(forms.Form):
     )
 
 
-class AssignLeaveForm(HorillaForm):
+class AssignLeaveForm(moaredForm):
     """
     Form for Payslip
     """
@@ -1077,9 +1077,9 @@ class AssignLeaveForm(HorillaForm):
         label="Leave Type",
         required=False,
     )
-    employee_id = HorillaMultiSelectField(
+    employee_id = moaredMultiSelectField(
         queryset=Employee.objects.all(),
-        widget=HorillaMultiSelectWidget(
+        widget=moaredMultiSelectWidget(
             filter_route_name="employee-widget-filter",
             filter_class=EmployeeFilter,
             filter_instance_contex_name="f",

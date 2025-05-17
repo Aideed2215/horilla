@@ -10,6 +10,6 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_http_methods
 
-from base.models import HorillaMailTemplate
+from base.models import moaredMailTemplate
 from moared.decorators import hx_request_required, login_required, permission_required
 from recruitment.models import Candidate

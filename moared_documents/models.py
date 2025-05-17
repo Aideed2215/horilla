@@ -8,9 +8,9 @@ from django.dispatch import receiver
 from django.forms import ValidationError
 from django.utils.translation import gettext as _
 
-from base.moared_company_manager import HorillaCompanyManager
+from base.moared_company_manager import moaredCompanyManager
 from employee.models import Employee
-from moared.models import HorillaModel
+from moared.models import moaredModel
 
 STATUS = [
     ("requested", "Requested"),
@@ -41,13 +41,13 @@ def document_create(instance):
         document[0].save()
 
 
-class DocumentRequest(HorillaModel):
+class DocumentRequest(moaredModel):
     title = models.CharField(max_length=100)
     employee_id = models.ManyToManyField(Employee)
     format = models.CharField(choices=FORMATS, max_length=10)
     max_size = models.IntegerField(blank=True, null=True)
     description = models.TextField(blank=True, null=True, max_length=255)
-    objects = HorillaCompanyManager(
+    objects = moaredCompanyManager(
         related_company_field="employee_id__employee_work_info__company_id"
     )
 
@@ -64,7 +64,7 @@ def document_request_m2m_changed(sender, instance, action, **kwargs):
         document_create(instance)
 
 
-class Document(HorillaModel):
+class Document(moaredModel):
     title = models.CharField(max_length=250)
     employee_id = models.ForeignKey(Employee, on_delete=models.PROTECT)
     document_request_id = models.ForeignKey(
@@ -81,7 +81,7 @@ class Document(HorillaModel):
     is_digital_asset = models.BooleanField(
         default=False, verbose_name=_("Is Digital Asset")
     )
-    objects = HorillaCompanyManager(
+    objects = moaredCompanyManager(
         related_company_field="employee_id__employee_work_info__company_id"
     )
 

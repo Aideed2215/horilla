@@ -1,5 +1,5 @@
 """
-horillafilters.py
+moaredfilters.py
 
 This module is used to write custom template filters.
 

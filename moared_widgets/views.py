@@ -3,7 +3,7 @@ from django.shortcuts import render
 from moared.decorators import login_required
 from moared_widgets.widgets.select_widgets import (
     ALL_INSTANCES,
-    HorillaMultiSelectWidget,
+    moaredMultiSelectWidget,
 )
 
 # Create your views here.

@@ -80,7 +80,7 @@ class FilterSet(django_filters.FilterSet):
                 )
 
 
-class HorillaPaginator(Paginator):
+class moaredPaginator(Paginator):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.start_count = 0
@@ -101,9 +101,9 @@ class HorillaPaginator(Paginator):
         return self.page
 
 
-class HorillaFilterSet(FilterSet):
+class moaredFilterSet(FilterSet):
     """
-    HorillaFilterSet
+    moaredFilterSet
     """
 
     verbose_name: dict = {}

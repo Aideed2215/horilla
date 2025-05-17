@@ -1,4 +1,4 @@
-{% load static %} {% load i18n %} {% load horillafilters %}
+{% load static %} {% load i18n %} {% load moaredfilters %}
 {% load basefilters %}
 <script>
   function activeNav(id) {
@@ -158,7 +158,7 @@
                 Approvals " %}</a>
             </li>
             {% endif %}
-            {% if perms.base.view_horillamailtemplate %}
+            {% if perms.base.view_moaredmailtemplate %}
             <li class="oh-sidebar__submenu-item">
               <a class="oh-sidebar__submenu-link" href="{% url 'view-mail-templates' %}"
                 class="oh-sidebar__submenu-link">{% trans "Mail Templates" %}</a>

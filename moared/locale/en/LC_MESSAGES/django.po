@@ -6993,8 +6993,8 @@ msgstr ""
 #: base/templates/holiday/holiday.html:92
 #: base/templates/shift_request/htmx/shift_request_detail.html:88
 #: base/templates/work_type_request/htmx/work_type_request_single_view.html:110
-#: base/templatetags/horillafilters.py:280
-#: base/templatetags/horillafilters.py:286
+#: base/templatetags/moaredfilters.py:280
+#: base/templatetags/moaredfilters.py:286
 #: biometric/templates/biometric/list_employees_cosec_biometric.html:62
 #: biometric/templates/biometric/list_employees_cosec_biometric.html:80
 #: employee/templates/disciplinary_actions/disciplinary_records.html:105
@@ -7016,8 +7016,8 @@ msgstr ""
 #: base/templates/holiday/holiday.html:94
 #: base/templates/shift_request/htmx/shift_request_detail.html:89
 #: base/templates/work_type_request/htmx/work_type_request_single_view.html:111
-#: base/templatetags/horillafilters.py:280
-#: base/templatetags/horillafilters.py:288
+#: base/templatetags/moaredfilters.py:280
+#: base/templatetags/moaredfilters.py:288
 #: biometric/templates/biometric/list_employees_cosec_biometric.html:64
 #: biometric/templates/biometric/list_employees_cosec_biometric.html:81
 #: employee/templates/disciplinary_actions/disciplinary_records.html:106

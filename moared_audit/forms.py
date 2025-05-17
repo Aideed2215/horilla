@@ -10,7 +10,7 @@ from django.forms.utils import ErrorList
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
 
-from moared_audit.models import AuditTag, HorillaAuditInfo
+from moared_audit.models import AuditTag, moaredAuditInfo
 
 
 class HistoryForm(forms.Form):

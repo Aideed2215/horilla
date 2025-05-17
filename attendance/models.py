@@ -29,13 +29,13 @@ from attendance.methods.utils import (
     validate_time_format,
     validate_time_in_minutes,
 )
-from base.moared_company_manager import HorillaCompanyManager
+from base.moared_company_manager import moaredCompanyManager
 from base.methods import is_company_leave, is_holiday
 from base.models import Company, EmployeeShift, EmployeeShiftDay, Holidays, WorkType
 from employee.models import Employee
 from moared.methods import get_moared_model_class
-from moared.models import HorillaModel
-from moared_audit.models import HorillaAuditInfo, HorillaAuditLog
+from moared.models import moaredModel
+from moared_audit.models import moaredAuditInfo, moaredAuditLog
 
 # to skip the migration issue with the old migrations
 _validate_time_in_minutes = validate_time_in_minutes
@@ -44,7 +44,7 @@ _validate_time_in_minutes = validate_time_in_minutes
 # Create your models here.
 
 
-class AttendanceActivity(HorillaModel):
+class AttendanceActivity(moaredModel):
     """
     AttendanceActivity model
     """
@@ -72,7 +72,7 @@ class AttendanceActivity(HorillaModel):
     clock_out_date = models.DateField(null=True, verbose_name=_("Out Date"))
     out_datetime = models.DateTimeField(null=True)
     clock_out = models.TimeField(null=True, verbose_name=_("Check Out"))
-    objects = HorillaCompanyManager(
+    objects = moaredCompanyManager(
         related_company_field="employee_id__employee_work_info__company_id"
     )
 
@@ -100,7 +100,7 @@ class AttendanceActivity(HorillaModel):
         return time_difference.total_seconds()
 
 
-class BatchAttendance(HorillaModel):
+class BatchAttendance(moaredModel):
     """
     Batch attendance model
     """
@@ -111,7 +111,7 @@ class BatchAttendance(HorillaModel):
         return f"{self.title}-{self.id}"
 
 
-class Attendance(HorillaModel):
+class Attendance(moaredModel):
     """
     Attendance model
     """
@@ -216,13 +216,13 @@ class Attendance(HorillaModel):
     )
     is_holiday = models.BooleanField(default=False)
     requested_data = models.JSONField(null=True, editable=False)
-    objects = HorillaCompanyManager(
+    objects = moaredCompanyManager(
         related_company_field="employee_id__employee_work_info__company_id"
     )
-    history = HorillaAuditLog(
+    history = moaredAuditLog(
         related_name="history_set",
         bases=[
-            HorillaAuditInfo,
+            moaredAuditInfo,
         ],
     )
 
@@ -563,11 +563,11 @@ class Attendance(HorillaModel):
                 )
 
 
-class AttendanceRequestFile(HorillaModel):
+class AttendanceRequestFile(moaredModel):
     file = models.FileField(upload_to="attendance/request_files")
 
 
-class AttendanceRequestComment(HorillaModel):
+class AttendanceRequestComment(moaredModel):
     """
     AttendanceRequestComment Model
     """
@@ -581,7 +581,7 @@ class AttendanceRequestComment(HorillaModel):
         return f"{self.comment}"
 
 
-class AttendanceOverTime(HorillaModel):
+class AttendanceOverTime(moaredModel):
     """
     AttendanceOverTime model
     """
@@ -638,7 +638,7 @@ class AttendanceOverTime(HorillaModel):
         null=True,
         verbose_name=_("Overtime Seconds"),
     )
-    objects = HorillaCompanyManager(
+    objects = moaredCompanyManager(
         related_company_field="employee_id__employee_work_info__company_id"
     )
 
@@ -738,7 +738,7 @@ class AttendanceOverTime(HorillaModel):
         super().save(*args, **kwargs)
 
 
-class AttendanceLateComeEarlyOut(HorillaModel):
+class AttendanceLateComeEarlyOut(moaredModel):
     """
     AttendanceLateComeEarlyOut model
     """
@@ -763,7 +763,7 @@ class AttendanceLateComeEarlyOut(HorillaModel):
         editable=False,
     )
     type = models.CharField(max_length=20, choices=choices, verbose_name=_("Type"))
-    objects = HorillaCompanyManager(
+    objects = moaredCompanyManager(
         related_company_field="employee_id__employee_work_info__company_id"
     )
     created_at = models.DateTimeField(auto_now_add=True, null=True)
@@ -792,7 +792,7 @@ class AttendanceLateComeEarlyOut(HorillaModel):
             {self.attendance_id.employee_id.employee_last_name} - {self.type}"
 
 
-class AttendanceValidationCondition(HorillaModel):
+class AttendanceValidationCondition(moaredModel):
     """
     AttendanceValidationCondition model
     """
@@ -812,7 +812,7 @@ class AttendanceValidationCondition(HorillaModel):
         default=False, verbose_name=_("Auto Approve OT")
     )
     company_id = models.ManyToManyField(Company, blank=True, verbose_name=_("Company"))
-    objects = HorillaCompanyManager()
+    objects = moaredCompanyManager()
 
     def clean(self):
         """
@@ -823,7 +823,7 @@ class AttendanceValidationCondition(HorillaModel):
             raise ValidationError(_("You cannot add more conditions."))
 
 
-class GraceTime(HorillaModel):
+class GraceTime(moaredModel):
     """
     Model for saving Grace time
     """
@@ -844,7 +844,7 @@ class GraceTime(HorillaModel):
     is_default = models.BooleanField(default=False)
 
     company_id = models.ManyToManyField(Company, blank=True, verbose_name=_("Company"))
-    objects = HorillaCompanyManager()
+    objects = moaredCompanyManager()
 
     def __str__(self) -> str:
         return str(f"{self.allowed_time} - Hours")
@@ -895,7 +895,7 @@ class GraceTime(HorillaModel):
         super().save(*args, **kwargs)
 
 
-class AttendanceGeneralSetting(HorillaModel):
+class AttendanceGeneralSetting(moaredModel):
     """
     AttendanceGeneralSettings
     """
@@ -906,7 +906,7 @@ class AttendanceGeneralSetting(HorillaModel):
 
 if apps.is_installed("leave") and apps.is_installed("payroll"):
 
-    class PenaltyAccount(HorillaModel):
+    class PenaltyAccount(moaredModel):
         """
         LateComeEarlyOutPenaltyAccount
         """
@@ -1069,7 +1069,7 @@ class WorkRecords(models.Model):
     is_leave_record = models.BooleanField(default=False)
     day_percentage = models.FloatField(default=0)
     last_update = models.DateTimeField(null=True, blank=True)
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = moaredCompanyManager("employee_id__employee_work_info__company_id")
 
     def title_message(self):
         title_message = self.message

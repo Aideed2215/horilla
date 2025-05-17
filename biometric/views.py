@@ -33,7 +33,7 @@ from moared.decorators import (
     login_required,
     permission_required,
 )
-from moared.filters import HorillaPaginator
+from moared.filters import moaredPaginator
 from moared.moared_settings import BIO_DEVICE_THREADS
 
 from .cosec import COSECBiometric
@@ -65,7 +65,7 @@ def paginator_qry(qryset, page_number):
     """
     This method is used to paginate query set
     """
-    paginator = HorillaPaginator(qryset, get_pagination())
+    paginator = moaredPaginator(qryset, get_pagination())
     qryset = paginator.get_page(page_number)
     return qryset
 

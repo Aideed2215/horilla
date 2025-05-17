@@ -12,7 +12,7 @@ The password used for database setup and initialization. This password is a
 DB_INIT_PASSWORD = "d3f6a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d"
 
 
-HORILLA_DATE_FORMATS = {
+moared_DATE_FORMATS = {
     "DD/MM/YY": "%d/%m/%y",
     "DD-MM-YYYY": "%d-%m-%Y",
     "DD.MM.YYYY": "%d.%m.%Y",
@@ -27,7 +27,7 @@ HORILLA_DATE_FORMATS = {
     "dddd, MMMM D, YYYY": "%A, %B %d, %Y",
 }
 
-HORILLA_TIME_FORMATS = {
+moared_TIME_FORMATS = {
     "hh:mm A": "%I:%M %p",  # 12-hour format
     "HH:mm": "%H:%M",  # 24-hour format
     "HH:mm:ss.SSSSSS": "%H:%M:%S.%f",  # 24-hour format with seconds and microseconds

@@ -15,7 +15,7 @@ from attendance.models import (
     WorkRecords,
 )
 from base.context_processors import AllCompany
-from base.moared_company_manager import HorillaCompanyManager
+from base.moared_company_manager import moaredCompanyManager
 from base.models import Company, ShiftRequest, WorkTypeRequest
 from employee.models import (
     DisciplinaryAction,
@@ -152,7 +152,7 @@ class CompanyMiddleware:
                                 "company_filter", Q(company_id=company_id)
                             )
                         elif (
-                            isinstance(model.objects, HorillaCompanyManager)
+                            isinstance(model.objects, moaredCompanyManager)
                             and model.objects.related_company_field
                         ):
                             model.add_to_class(
@@ -166,7 +166,7 @@ class CompanyMiddleware:
                                 Q(company_id=company_id) | Q(company_id__isnull=True),
                             )
                         elif (
-                            isinstance(model.objects, HorillaCompanyManager)
+                            isinstance(model.objects, moaredCompanyManager)
                             and model.objects.related_company_field
                         ):
                             model.add_to_class(

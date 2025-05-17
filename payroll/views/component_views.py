@@ -44,7 +44,7 @@ from moared.decorators import (
     permission_required,
 )
 from moared.group_by import group_by_queryset
-from moared.moared_settings import HORILLA_DATE_FORMATS
+from moared.moared_settings import moared_DATE_FORMATS
 from moared.methods import dynamic_attr, get_moared_model_class, get_urlencode
 
 # from leave.models import AvailableLeave
@@ -1108,7 +1108,7 @@ def payslip_export(request):
                 date_format = request.user.employee_get.get_date_format()
                 start_date = datetime.strptime(str(value), "%Y-%m-%d").date()
 
-                for format_name, format_string in HORILLA_DATE_FORMATS.items():
+                for format_name, format_string in moared_DATE_FORMATS.items():
                     if format_name == date_format:
                         data = start_date.strftime(format_string)
             else:
@@ -2022,7 +2022,7 @@ def payslip_detailed_export_data(request):
                 date_format = request.user.employee_get.get_date_format()
                 start_date = datetime.strptime(str(value), "%Y-%m-%d").date()
 
-                for format_name, format_string in HORILLA_DATE_FORMATS.items():
+                for format_name, format_string in moared_DATE_FORMATS.items():
                     if format_name == date_format:
                         data = start_date.strftime(format_string)
             else:

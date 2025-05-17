@@ -18,7 +18,7 @@ from moared_views.generic.cbv import views
 @method_decorator(
     permission_required("moared_automation.view_mailautomation"), name="dispatch"
 )
-class AutomationSectionView(views.HorillaSectionView):
+class AutomationSectionView(views.moaredSectionView):
     """
     AutomationSectionView
     """
@@ -38,7 +38,7 @@ class AutomationSectionView(views.HorillaSectionView):
 @method_decorator(
     permission_required("moared_automation.view_mailautomation"), name="dispatch"
 )
-class AutomationNavView(views.HorillaNavView):
+class AutomationNavView(views.moaredNavView):
     """
     AutomationNavView
     """
@@ -61,7 +61,7 @@ class AutomationNavView(views.HorillaNavView):
 @method_decorator(
     permission_required("moared_automation.change_mailautomation"), name="dispatch"
 )
-class AutomationFormView(views.HorillaFormView):
+class AutomationFormView(views.moaredFormView):
     """
     AutomationFormView
     """
@@ -94,7 +94,7 @@ class AutomationFormView(views.HorillaFormView):
 @method_decorator(
     permission_required("moared_automation.view_mailautomation"), name="dispatch"
 )
-class AutomationListView(views.HorillaListView):
+class AutomationListView(views.moaredListView):
     """
     AutomationListView
     """
@@ -146,7 +146,7 @@ class AutomationListView(views.HorillaListView):
 @method_decorator(
     permission_required("moared_automation.view_mailautomation"), name="dispatch"
 )
-class AutomationDetailedView(views.HorillaDetailedView):
+class AutomationDetailedView(views.moaredDetailedView):
     """
     AutomationDetailedView
     """

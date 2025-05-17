@@ -5,10 +5,10 @@ accessibility/models.py
 from django.db import models
 
 from accessibility.accessibility import ACCESSBILITY_FEATURE
-from moared.models import HorillaModel
+from moared.models import moaredModel
 
 
-class DefaultAccessibility(HorillaModel):
+class DefaultAccessibility(moaredModel):
     """
     DefaultAccessibilityModel
     """

@@ -14,7 +14,7 @@
       "state": "Nevada",
       "city": "las vegas",
       "zip": "89036",
-      "icon": "base/icon/Horilla_2.png",
+      "icon": "base/icon/moared_2.png",
       "date_format": null,
       "time_format": null
     }
@@ -34,7 +34,7 @@
       "state": "Karnataka",
       "city": "Bangalore",
       "zip": "560042",
-      "icon": "base/icon/Horilla_3.png",
+      "icon": "base/icon/moared_3.png",
       "date_format": null,
       "time_format": null
     }
@@ -54,7 +54,7 @@
       "state": "City of London",
       "city": "SE1 1LB",
       "zip": "673589",
-      "icon": "base/icon/Horilla_1.png",
+      "icon": "base/icon/moared_1.png",
       "date_format": null,
       "time_format": null
     }
@@ -3311,7 +3311,7 @@
     }
   },
   {
-    "model": "base.horillamailtemplate",
+    "model": "base.moaredmailtemplate",
     "pk": 1,
     "fields": {
       "created_at": "2024-11-05T09:39:13.733Z",
@@ -3324,7 +3324,7 @@
     }
   },
   {
-    "model": "base.horillamailtemplate",
+    "model": "base.moaredmailtemplate",
     "pk": 2,
     "fields": {
       "created_at": "2024-12-12T10:23:52.188Z",

@@ -70,7 +70,7 @@ from moared.decorators import (
     permission_required,
 )
 from moared.group_by import group_by_queryset
-from moared.moared_settings import HORILLA_DATE_FORMATS
+from moared.moared_settings import moared_DATE_FORMATS
 from moared.methods import moared_users_with_perms
 from notifications.signals import notify
 
@@ -1345,7 +1345,7 @@ def asset_export_excel(request):
                     start_date = datetime.strptime(str(value), "%Y-%m-%d").date()
 
                     # The formatted date for each format
-                    for format_name, format_string in HORILLA_DATE_FORMATS.items():
+                    for format_name, format_string in moared_DATE_FORMATS.items():
                         if format_name == date_format:
                             value = start_date.strftime(format_string)
 

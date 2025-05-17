@@ -19,7 +19,7 @@ from pms.forms import BonusPointSettingForm, EmployeeBonusPointForm
 # ================Models for BonusPointSetting==============
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("pms.view_bonuspointsetting"), name="dispatch")
-class BonusPointSettingSectionView(views.HorillaSectionView):
+class BonusPointSettingSectionView(views.moaredSectionView):
     """
     BonusPointSetting SectionView
     """
@@ -37,7 +37,7 @@ class BonusPointSettingSectionView(views.HorillaSectionView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("pms.view_bonuspointsetting"), name="dispatch")
-class BonusPointSettingNavView(views.HorillaNavView):
+class BonusPointSettingNavView(views.moaredNavView):
     """
     BonusPointSetting nav view
     """
@@ -58,7 +58,7 @@ class BonusPointSettingNavView(views.HorillaNavView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("pms.change_bonuspointsetting"), name="dispatch")
-class BonusPointSettingFormView(views.HorillaFormView):
+class BonusPointSettingFormView(views.moaredFormView):
     """
     BonusPointSettingForm View
     """
@@ -102,7 +102,7 @@ class BonusPointSettingFormView(views.HorillaFormView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("pms.view_bonuspointsetting"), name="dispatch")
-class BonusPointSettingListView(views.HorillaListView):
+class BonusPointSettingListView(views.moaredListView):
     """
     BnusPointSetting list view
     """
@@ -125,7 +125,7 @@ class BonusPointSettingListView(views.HorillaListView):
 # ================Models for EmployeeBonusPoint==============
 
 
-class EmployeeBonusPointSectionView(views.HorillaSectionView):
+class EmployeeBonusPointSectionView(views.moaredSectionView):
     """
     EmployeeBonusPoint SectionView
     """
@@ -141,7 +141,7 @@ class EmployeeBonusPointSectionView(views.HorillaSectionView):
     template_name = "bonus/employee_bonus_point_section.html"
 
 
-class EmployeeBonusPointNavView(views.HorillaNavView):
+class EmployeeBonusPointNavView(views.moaredNavView):
     """
     BonusPoint nav view
     """
@@ -183,7 +183,7 @@ class EmployeeBonusPointNavView(views.HorillaNavView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("pms.change_employeebonuspoint"), name="dispatch")
-class EmployeeBonusPointFormView(views.HorillaFormView):
+class EmployeeBonusPointFormView(views.moaredFormView):
     """
     BonusPointForm View
     """
@@ -224,7 +224,7 @@ class EmployeeBonusPointFormView(views.HorillaFormView):
         return super().form_valid(form)
 
 
-class EmployeeBonusPointListView(views.HorillaListView):
+class EmployeeBonusPointListView(views.moaredListView):
     """
     BnusPoint list view
     """

@@ -14,13 +14,13 @@ from django_filters import CharFilter
 # from attendance.models import Attendance
 from accessibility.models import DefaultAccessibility
 from employee.models import DisciplinaryAction, Employee, Policy
-from moared.filters import FilterSet, HorillaFilterSet, filter_by_name
+from moared.filters import FilterSet, moaredFilterSet, filter_by_name
 from moared.moared_middlewares import _thread_locals
 from moared_documents.models import Document
 from moared_views.templatetags.generic_template_filters import getattribute
 
 
-class EmployeeFilter(HorillaFilterSet):
+class EmployeeFilter(moaredFilterSet):
     """
     Filter set class for Candidate model
 

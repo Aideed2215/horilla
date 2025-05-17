@@ -17,7 +17,7 @@ from base.methods import eval_validate
 from moared_views import models
 from moared_views.cbv_methods import get_short_uuid, login_required, merge_dicts
 from moared_views.forms import SavedFilterForm
-from moared_views.generic.cbv.views import HorillaFormView, HorillaListView
+from moared_views.generic.cbv.views import moaredFormView, moaredListView
 
 # Create your views here.
 
@@ -77,7 +77,7 @@ class ReloadField(View):
         if not onchange:
             onchange = ""
 
-        model: models.HorillaModel = dynamic_cache["model"]
+        model: models.moaredModel = dynamic_cache["model"]
         value = dynamic_cache.get("value", "")
 
         cache_field = dynamic_cache["dynamic_field"]
@@ -170,7 +170,7 @@ class ActiveGroup(View):
 
 
 @method_decorator(login_required, name="dispatch")
-class SavedFilter(HorillaFormView):
+class SavedFilter(moaredFormView):
     """
     SavedFilter
     """
@@ -280,7 +280,7 @@ class LastAppliedFilter(View):
         return HttpResponse("success")
 
 
-class DynamiListView(HorillaListView):
+class DynamiListView(moaredListView):
     """
     DynamicListView for Generic Delete
     """
@@ -296,7 +296,7 @@ class DynamiListView(HorillaListView):
         return filter(_search_filter, self.instances)
 
 
-class HorillaDeleteConfirmationView(View):
+class moaredDeleteConfirmationView(View):
     """
     Generic Delete Confirmation View
     """
@@ -368,7 +368,7 @@ class HorillaDeleteConfirmationView(View):
                     f"{get_short_uuid(prefix='generic-delete',length=10)}"
                 )
 
-                class DynamiListView(HorillaListView):
+                class DynamiListView(moaredListView):
                     """
                     DynamicListView for Generic Delete
                     """

@@ -2,14 +2,14 @@ from django.apps import apps
 
 try:
     RecruitmentMailTemplate = apps.get_model("recruitment", "RecruitmentMailTemplate")
-    HorillaMailTemplate = apps.get_model("base", "HorillaMailTemplate")
+    moaredMailTemplate = apps.get_model("base", "moaredMailTemplate")
 
     recruitment_mail_templates = RecruitmentMailTemplate.objects.all()
     for recruitment_mail in recruitment_mail_templates:
-        if not HorillaMailTemplate.objects.filter(
+        if not moaredMailTemplate.objects.filter(
             title=recruitment_mail.title
         ).exists():
-            moared_mail = HorillaMailTemplate(
+            moared_mail = moaredMailTemplate(
                 id=recruitment_mail.id,
                 title=recruitment_mail.title,
                 body=recruitment_mail.body,
@@ -17,7 +17,7 @@ try:
             )
             moared_mail.save()
 
-    moared_mail_templates = HorillaMailTemplate.objects.all()
+    moared_mail_templates = moaredMailTemplate.objects.all()
     RecruitmentMailTemplate.objects.all().delete()
 except Exception as e:
     pass
